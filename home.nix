@@ -86,9 +86,33 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
+    completionInit = ''
+      autoload -Uz compinit
+
+      mkdir -p "${config.xdg.cacheHome}/zsh"
+
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+      zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
+
+      compinit -d "${config.xdg.cacheHome}/zsh/zcompdump"
+    '';
+
     autosuggestion.enable = true;
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+
+    settings = {
+      add_newline = false;
+      format = "$directory$git_branch$character";
+
+      package.disabled = true;
+    };
   };
 
   programs.direnv = {
