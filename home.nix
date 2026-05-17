@@ -83,9 +83,17 @@
     vimAlias = true; 
   };
 
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    historySubstringSearch.enable = true;
+    syntaxHighlighting.enable = true;
+  };
+
   programs.direnv = {
     enable = true;
-    enableBashIntegration = true; # see note on other shells below
+    enableZshIntegration = true;
     nix-direnv.enable = true;
   };
 
