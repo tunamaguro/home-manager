@@ -54,9 +54,15 @@
   programs.git = {
     enable = true;
     settings = {
-      user.name = "tunamaguro";
-      user.email = "79092292+tunamaguro@users.noreply.github.com";
+      user = {
+        name = "tunamaguro";
+        email = "79092292+tunamaguro@users.noreply.github.com";
+      };
       init.defaultBranch = "main";
+
+      core = {
+        editor = "nvim";
+      };
     };
   };
 
