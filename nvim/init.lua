@@ -1,11 +1,15 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Disable netrw before nvim-tree is loaded.
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 require("options")
 require("keymaps")
 
 require("plugins.blink")
-require('plugins.bufferline')
+require("plugins.bufferline")
 require("plugins.nvim-tree")
 require("plugins.telescope")
 require("plugins.gitsigns")
