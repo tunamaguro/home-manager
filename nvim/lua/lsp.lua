@@ -1,4 +1,12 @@
-vim.lsp.enable("rust_analyzer")
+vim.diagnostic.config({
+  virtual_text = true
+})
+
+vim.lsp.enable({
+  "rust_analyzer",
+  "lua_ls",
+  "nixd",
+})
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("user-lsp", { clear = true }),

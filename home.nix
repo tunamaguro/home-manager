@@ -70,6 +70,11 @@
 
     package = pkgsUnstable.neovim-unwrapped;
 
+    extraPackages = with pkgs; [
+      lua-language-server
+      nixd
+    ];
+
     plugins = with pkgsUnstable.vimPlugins; [
       # LSP server configs
       nvim-lspconfig
@@ -100,6 +105,7 @@
 
       # buffer/tab 
       bufferline-nvim
+      mini-bufremove
 
       # color schema
       nightfox-nvim
