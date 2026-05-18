@@ -17,9 +17,4 @@ vim.opt.signcolumn = 'yes:1'
 vim.opt.wrap = false
 vim.opt.list = true
 
--- use 2-spaces indent
-vim.opt.expandtab = true
-vim.opt.shiftround = true
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-vim.opt.tabstop = 4
+vim.opt.completeopt = { "menu", "menuone", "noselect" }

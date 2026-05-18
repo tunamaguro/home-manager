@@ -88,6 +88,16 @@
       # completion
       blink-cmp
 
+
+      (nvim-treesitter.withPlugins (p: [
+        p.rust
+        p.toml
+        p.nix
+        p.lua
+        p.vim
+        p.vimdoc
+      ]))
+
       # File explorer
       nvim-tree-lua
       nvim-web-devicons
