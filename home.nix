@@ -85,9 +85,11 @@
     package = pkgsUnstable.neovim-unwrapped;
 
     plugins = with pkgsUnstable.vimPlugins; [
+      # LSP server configs
+      nvim-lspconfig
+
       # completion
       blink-cmp
-
 
       (nvim-treesitter.withPlugins (p: [
         p.rust
