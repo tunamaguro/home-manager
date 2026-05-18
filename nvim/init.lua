@@ -7,6 +7,7 @@ require("keymaps")
 require("plugins.blink")
 require("plugins.nvim-tree")
 require("plugins.telescope")
+require("plugins.gitsigns")
 
 require("lsp")
 require("highlight")
