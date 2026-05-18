@@ -1,5 +1,5 @@
 -- クリップボードをOSと共有
-vim.opt.clipboard:append({'unnamedplus','unnamed'})
+vim.opt.clipboard:append({'unnamedplus'})
 
 -- 24bit color
 vim.opt.termguicolors = true
