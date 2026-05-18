@@ -103,6 +103,7 @@
       nvim-web-devicons
     ];
   };
+  xdg.configFile."nvim".source = ./nvim;
 
   programs.zsh = {
     enable = true;
