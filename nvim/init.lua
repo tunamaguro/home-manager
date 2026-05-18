@@ -5,6 +5,7 @@ require("options")
 require("keymaps")
 
 require("plugins.blink")
+require('plugins.bufferline')
 require("plugins.nvim-tree")
 require("plugins.telescope")
 require("plugins.gitsigns")

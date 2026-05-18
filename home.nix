@@ -97,6 +97,9 @@
       # File explorer
       nvim-tree-lua
       nvim-web-devicons
+
+      # buffer/tab 
+      bufferline-nvim
     ];
   };
   xdg.configFile."nvim".source = ./nvim;
