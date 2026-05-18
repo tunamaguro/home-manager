@@ -18,3 +18,7 @@ vim.opt.wrap = false
 vim.opt.list = true
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.expandtab = true
