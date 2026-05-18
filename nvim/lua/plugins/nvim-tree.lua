@@ -38,3 +38,13 @@ require("nvim-tree").setup({
     enable = true,
   },
 })
+
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", {
+  desc = "Toggle file explorer",
+  silent = true,
+})
+
+vim.keymap.set("n", "<leader>E", "<cmd>NvimTreeFindFile<CR>", {
+  desc = "Reveal current file in explorer",
+  silent = true,
+})
