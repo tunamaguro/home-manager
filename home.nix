@@ -82,6 +82,9 @@
       plenary-nvim
       telescope-fzf-native-nvim
 
+      # Git signs / hunk navigation
+      gitsigns-nvim
+
       (nvim-treesitter.withPlugins (p: [
         p.rust
         p.toml
