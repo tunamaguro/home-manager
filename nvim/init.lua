@@ -8,6 +8,7 @@ vim.g.loaded_netrwPlugin = 1
 require("options")
 require("keymaps")
 
+require('plugins.colorschema')
 require("plugins.blink")
 require("plugins.bufferline")
 require("plugins.nvim-tree")
