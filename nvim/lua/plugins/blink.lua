@@ -3,6 +3,28 @@ local blink = require("blink.cmp")
 blink.setup({
   keymap = {
     preset = "default",
+
+    ["<Tab>"] = {
+      function(cmp)
+        if cmp.snippet_active() then
+          return cmp.accept()
+        end
+
+        return cmp.select_and_accept()
+      end,
+      "snippet_forward",
+      "fallback",
+    },
+
+    ["<S-Tab>"] = {
+      "snippet_backward",
+      "fallback",
+    },
+
+    ["<CR>"] = {
+      "accept",
+      "fallback",
+    },
   },
 
   appearance = {
@@ -10,10 +32,17 @@ blink.setup({
   },
 
   signature = {
-    enabled = true
+    enabled = true,
   },
 
   completion = {
+    list = {
+      selection = {
+        preselect = false,
+        auto_insert = false,
+      },
+    },
+
     documentation = {
       auto_show = true,
       auto_show_delay_ms = 500,
