@@ -17,7 +17,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgsUnstable; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -34,6 +34,9 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+
+    fd
+    ripgrep
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -90,6 +93,11 @@
 
       # completion
       blink-cmp
+
+      # fuzzy finder
+      telescope-nvim
+      plenary-nvim
+      telescope-fzf-native-nvim
 
       (nvim-treesitter.withPlugins (p: [
         p.rust
@@ -158,7 +166,6 @@
   #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
   #
   # or
-  #
   #  /etc/profiles/per-user/tunamaguro/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
