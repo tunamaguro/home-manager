@@ -43,3 +43,11 @@ vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, {
 vim.keymap.set("n", "<leader>fS", builtin.lsp_dynamic_workspace_symbols, {
   desc = "Workspace symbols",
 })
+
+vim.keymap.set("n", "<leader>fq", builtin.quickfix, {
+  desc = "Find quickfix items",
+})
+
+vim.keymap.set("n", "<leader>gs", builtin.git_status, {
+  desc = "Git changed files",
+})
