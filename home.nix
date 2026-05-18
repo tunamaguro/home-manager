@@ -100,6 +100,9 @@
 
       # buffer/tab 
       bufferline-nvim
+
+      # color schema
+      nightfox-nvim
     ];
   };
   xdg.configFile."nvim".source = ./nvim;
