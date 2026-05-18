@@ -1,5 +1,7 @@
 local api = require("nvim-tree.api")
 
+local auto_open_enabled = true
+
 local git_filetypes = {
   git = true,
   gitcommit = true,
@@ -26,6 +28,10 @@ local function is_git_context()
 end
 
 local function should_open_tree()
+  if not auto_open_enabled then
+    return false
+  end
+
   if vim.bo.filetype == "NvimTree" then
     return false
   end
@@ -52,6 +58,11 @@ local function sync_tree_visibility()
   if should_open_tree() and not api.tree.is_visible() then
     api.tree.open({ focus = false })
   end
+end
+
+local function open_tree(opts)
+  auto_open_enabled = true
+  api.tree.open(opts or {})
 end
 
 require("nvim-tree").setup({
@@ -99,6 +110,15 @@ vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter", "TabEnter" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd("QuitPre", {
+  group = vim.api.nvim_create_augroup("user-nvim-tree-manual-close", { clear = true }),
+  callback = function()
+    if vim.bo.filetype == "NvimTree" then
+      auto_open_enabled = false
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd("BufEnter", {
   group = vim.api.nvim_create_augroup("user-nvim-tree-quit", { clear = true }),
   callback = function()
@@ -108,12 +128,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", {
+vim.keymap.set("n", "<leader>e", function()
+  open_tree({ focus = true })
+end, {
   desc = "Focus file explorer",
   silent = true,
 })
 
-vim.keymap.set("n", "<leader>E", "<cmd>NvimTreeFindFile<CR>", {
+vim.keymap.set("n", "<leader>E", function()
+  auto_open_enabled = true
+  api.tree.find_file({ open = true, focus = true })
+end, {
   desc = "Reveal current file in explorer",
   silent = true,
 })
