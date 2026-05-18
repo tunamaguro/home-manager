@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgsUnstable, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -80,7 +80,18 @@
     enable = true;
     defaultEditor = true;
     viAlias = true;
-    vimAlias = true; 
+    vimAlias = true;
+
+    package = pkgsUnstable.neovim-unwrapped;
+
+    plugins = with pkgsUnstable.vimPlugins; [
+      # completion
+      blink-cmp
+
+      # File explorer
+      nvim-tree-lua
+      nvim-web-devicons
+    ];
   };
 
   programs.zsh = {
