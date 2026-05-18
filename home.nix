@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgsUnstable, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -17,23 +17,9 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+  home.packages = with pkgs; [
+    fd
+    ripgrep
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -80,8 +66,40 @@
     enable = true;
     defaultEditor = true;
     viAlias = true;
-    vimAlias = true; 
+    vimAlias = true;
+
+    package = pkgsUnstable.neovim-unwrapped;
+
+    plugins = with pkgsUnstable.vimPlugins; [
+      # LSP server configs
+      nvim-lspconfig
+
+      # completion
+      blink-cmp
+
+      # fuzzy finder
+      telescope-nvim
+      plenary-nvim
+      telescope-fzf-native-nvim
+
+      # Git signs / hunk navigation
+      gitsigns-nvim
+
+      (nvim-treesitter.withPlugins (p: [
+        p.rust
+        p.toml
+        p.nix
+        p.lua
+        p.vim
+        p.vimdoc
+      ]))
+
+      # File explorer
+      nvim-tree-lua
+      nvim-web-devicons
+    ];
   };
+  xdg.configFile."nvim".source = ./nvim;
 
   programs.zsh = {
     enable = true;
@@ -134,7 +152,6 @@
   #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
   #
   # or
-  #
   #  /etc/profiles/per-user/tunamaguro/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
