@@ -1,2 +1,2 @@
 require('nightfox')
-vim.cmd('colorschema nightfox')
+vim.cmd('colorscheme nightfox')
