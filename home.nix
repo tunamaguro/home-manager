@@ -100,6 +100,7 @@
 
       # buffer/tab 
       bufferline-nvim
+      mini-bufremove
 
       # color schema
       nightfox-nvim
