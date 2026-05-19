@@ -28,13 +28,6 @@ vim.lsp.config("lua_ls", {
       },
     })
   end,
-  settings = {
-    Lua = {
-      diagnostics = {
-        unusedLocalExclude = { "_*" },
-      },
-    },
-  },
 })
 
 vim.lsp.enable({
