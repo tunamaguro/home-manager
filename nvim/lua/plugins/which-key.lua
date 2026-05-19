@@ -1,10 +1,25 @@
 local wk = require("which-key")
+
+wk.setup({
+  preset = "classic",
+})
+
 wk.add({
   {
     "<leader>?",
-    function ()
-           require("which-key").show({ global = false }) 
+    function()
+      wk.show({ keys = "<leader>", mode = "n" })
     end,
-    desc = "Buffer Local Keymaps (which-key)",
-  }
+    desc = "Show leader keymaps",
+  },
+  {
+    "<leader>b?",
+    function()
+      wk.show({ global = false })
+    end,
+    desc = "Show buffer-local keymaps",
+  },
+  { "<leader>b", group = "buffer" },
+  { "<leader>f", group = "find" },
+  { "<leader>g", group = "git" },
 })
