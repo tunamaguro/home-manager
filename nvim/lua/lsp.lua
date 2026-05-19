@@ -3,7 +3,6 @@ vim.diagnostic.config({
 })
 
 vim.lsp.config("lua_ls", {
-  root_markers = { ".luarc.json", ".luarc.jsonc", ".git" },
   on_init = function(client)
     local root = client.workspace_folders and client.workspace_folders[1] and client.workspace_folders[1].name
     if root == nil then
@@ -20,9 +19,6 @@ vim.lsp.config("lua_ls", {
     client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua or {}, {
       runtime = {
         version = "LuaJIT",
-      },
-      diagnostics = {
-        globals = { "vim" },
       },
       workspace = {
         checkThirdParty = "Disable",
