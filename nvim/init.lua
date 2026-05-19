@@ -15,6 +15,8 @@ require("plugins.bufremove")
 require("plugins.nvim-tree")
 require("plugins.telescope")
 require("plugins.gitsigns")
+require("plugins.indent-blankline")
+require("plugins.which-key")
 
 require("lsp")
 require("highlight")
