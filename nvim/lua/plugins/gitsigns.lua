@@ -13,7 +13,7 @@ require("gitsigns").setup({
   numhl = false,
   linehl = false,
   word_diff = false,
-  current_line_blame = true,
+  current_line_blame = false,
 
   on_attach = function(bufnr)
     local gitsigns = require("gitsigns")
@@ -41,6 +41,8 @@ require("gitsigns").setup({
     map("n", "<leader>gb", function()
       gitsigns.blame_line({ full = true })
     end, "Git blame line")
+
+    map("n", "<leader>gB", gitsigns.toggle_current_line_blame, "Toggle git blame line")
 
     map("n", "<leader>gd", gitsigns.diffthis, "Git diff current file")
 
