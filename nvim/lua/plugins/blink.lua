@@ -3,7 +3,6 @@ local blink = require("blink.cmp")
 blink.setup({
   keymap = {
     preset = "default",
-    ["<CR>"] = { "accept", "fallback" },
     ["<Tab>"] = {
       function(cmp)
         if cmp.is_menu_visible() then
