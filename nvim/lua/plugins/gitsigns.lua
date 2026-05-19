@@ -38,6 +38,24 @@ require("gitsigns").setup({
 
     map("n", "<leader>gi", gitsigns.preview_hunk_inline, "Preview git hunk inline")
 
+    map("n", "<leader>gS", gitsigns.stage_hunk, "Stage git hunk")
+
+    map("v", "<leader>gS", function()
+      gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+    end, "Stage selected git hunk lines")
+
+    map("n", "<leader>gR", gitsigns.reset_hunk, "Reset git hunk")
+
+    map("v", "<leader>gR", function()
+      gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+    end, "Reset selected git hunk lines")
+
+    map("n", "<leader>gu", gitsigns.undo_stage_hunk, "Undo stage git hunk")
+
+    map("n", "<leader>gA", gitsigns.stage_buffer, "Stage git buffer")
+
+    map("n", "<leader>gX", gitsigns.reset_buffer, "Reset git buffer")
+
     map("n", "<leader>gb", function()
       gitsigns.blame_line({ full = true })
     end, "Git blame line")
