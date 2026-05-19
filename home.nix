@@ -60,7 +60,14 @@
 
     gitCredentialHelper.enable = true;
   };
-  
+
+  programs.tmux = {
+    enable = true;
+
+    extraConfig = ''
+      source-file ${./tmux/tmux.conf}
+    '';
+  };
 
   programs.neovim = {
     enable = true;
