@@ -17,6 +17,7 @@ require("plugins.telescope")
 require("plugins.gitsigns")
 require("plugins.indent-blankline")
 require("plugins.which-key")
+require("plugins.pairs")
 
 require("lsp")
 require("highlight")

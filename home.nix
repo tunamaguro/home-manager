@@ -121,6 +121,10 @@
       # keymap support
       which-key-nvim
 
+      # pair util
+      nvim-autopairs
+      nvim-surround
+
       # color schema
       nightfox-nvim
     ];
