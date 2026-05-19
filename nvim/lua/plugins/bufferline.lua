@@ -21,12 +21,12 @@ require("bufferline").setup({
   },
 })
 
-vim.keymap.set("n", "[b", "<cmd>BufferLineCycleNext<CR>", {
-  desc = "Next buffer",
+vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<CR>", {
+  desc = "Previous buffer",
   silent = true,
 })
 
-vim.keymap.set("n", "]b", "<cmd>BufferLineCyclePrev<CR>", {
-  desc = "Previous buffer",
+vim.keymap.set("n", "]b", "<cmd>BufferLineCycleNext<CR>", {
+  desc = "Next buffer",
   silent = true,
 })
