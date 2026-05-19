@@ -13,7 +13,7 @@ require("gitsigns").setup({
   numhl = false,
   linehl = false,
   word_diff = false,
-  current_line_blame = false,
+  current_line_blame = true,
 
   on_attach = function(bufnr)
     local gitsigns = require("gitsigns")

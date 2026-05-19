@@ -2,7 +2,7 @@ local blink = require("blink.cmp")
 
 blink.setup({
   keymap = {
-    preset = "enter",
+    preset = "default",
   },
 
   appearance = {
