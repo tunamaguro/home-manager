@@ -2,21 +2,80 @@ vim.diagnostic.config({
   virtual_text = true,
 })
 
+local function normalize_path(path)
+  return vim.fs.normalize(path):gsub("/$", "")
+end
+
+local function is_subpath(path, root)
+  local normalized_path = normalize_path(path)
+  local normalized_root = normalize_path(root)
+
+  return normalized_path == normalized_root or vim.startswith(normalized_path, normalized_root .. "/")
+end
+
+local function is_home_manager_neovim_root(root_dir)
+  if root_dir == nil or root_dir == "" then
+    return false
+  end
+
+  local root = normalize_path(root_dir)
+  local dirname = vim.fn.fnamemodify(root, ":t")
+  local parent = vim.fs.dirname(root)
+
+  return (dirname == "nvim" or dirname == "neovim") and vim.fn.fnamemodify(parent, ":t") == "home-manager"
+end
+
+local function lua_root_dir(bufnr, on_dir)
+  local filename = vim.api.nvim_buf_get_name(bufnr)
+  if filename == "" then
+    on_dir(vim.fn.getcwd())
+    return
+  end
+
+  local file = normalize_path(filename)
+  local file_dir = vim.fs.dirname(file)
+  local git_dir = vim.fs.find(".git", {
+    path = file_dir,
+    upward = true,
+    type = "directory",
+  })[1]
+  local root = git_dir and vim.fs.dirname(git_dir) or file_dir
+
+  if vim.fn.fnamemodify(root, ":t") == "home-manager" then
+    for _, dirname in ipairs({ "neovim", "nvim" }) do
+      local neovim_root = normalize_path(root .. "/" .. dirname)
+      if is_subpath(file, neovim_root) then
+        on_dir(neovim_root)
+        return
+      end
+    end
+  end
+
+  on_dir(root)
+end
+
 vim.lsp.config("lua_ls", {
-  settings = {
-    Lua = {
-      runtime = {
-        version = "LuaJIT",
+  root_dir = lua_root_dir,
+  before_init = function(_, config)
+    if not is_home_manager_neovim_root(config.root_dir) then
+      return
+    end
+
+    config.settings = vim.tbl_deep_extend("force", config.settings or {}, {
+      Lua = {
+        runtime = {
+          version = "LuaJIT",
+        },
+        diagnostics = {
+          globals = { "vim" },
+        },
+        workspace = {
+          checkThirdParty = "Disable",
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
       },
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        checkThirdParty = false,
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-    },
-  },
+    })
+  end,
 })
 
 vim.lsp.enable({
