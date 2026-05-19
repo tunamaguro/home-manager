@@ -65,6 +65,8 @@
     enable = true;
 
     extraConfig = ''
+      set -g default-shell ${pkgs.zsh}/bin/zsh
+      set -g default-command ${pkgs.zsh}/bin/zsh
       source-file ${./tmux/tmux.conf}
     '';
   };
