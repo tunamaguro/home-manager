@@ -27,26 +27,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
     end
 
+    -- Do not duplicate Nvim's built-in LSP/diagnostic keymaps.
+    -- Nvim 0.12 provides gra/gri/grn/grr/grt/grx/gO, K, [d, ]d, [D, ]D, and <C-w>d.
     map("n", "gd", vim.lsp.buf.definition, "LSP go to definition")
     map("n", "gD", vim.lsp.buf.declaration, "LSP go to declaration")
-    map("n", "K", vim.lsp.buf.hover, "LSP hover documentation")
 
-    map("n", "<leader>la", vim.lsp.buf.code_action, "LSP code action")
     map("n", "<leader>lf", function()
       vim.lsp.buf.format({ bufnr = event.buf, async = false, timeout_ms = 1000 })
     end, "LSP format buffer")
-    map("n", "<leader>li", vim.lsp.buf.implementation, "LSP implementation")
     map("n", "<leader>lq", vim.diagnostic.setqflist, "LSP diagnostics to quickfix")
-    map("n", "<leader>lr", vim.lsp.buf.rename, "LSP rename")
-    map("n", "<leader>lR", vim.lsp.buf.references, "LSP references")
-    map("n", "<leader>lt", vim.lsp.buf.type_definition, "LSP type definition")
-
-    map("n", "[d", function()
-      vim.diagnostic.jump({ count = -1, float = true })
-    end, "Previous diagnostic")
-    map("n", "]d", function()
-      vim.diagnostic.jump({ count = 1, float = true })
-    end, "Next diagnostic")
 
     if client:supports_method("textDocument/inlayHint") then
       vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
