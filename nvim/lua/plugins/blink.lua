@@ -3,11 +3,10 @@ local blink = require("blink.cmp")
 blink.setup({
   keymap = {
     preset = "default",
-    ["<CR>"] = { "accept", "fallback" },
     ["<Tab>"] = {
       function(cmp)
         if cmp.is_menu_visible() then
-          return cmp.select_next()
+          return cmp.select_next({ auto_insert = false })
         end
 
         if cmp.is_ghost_text_visible() then
@@ -19,7 +18,27 @@ blink.setup({
       "snippet_forward",
       "fallback",
     },
-    ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+    ["<S-Tab>"] = {
+      function(cmp)
+        if cmp.is_menu_visible() then
+          return cmp.select_prev({ auto_insert = false })
+        end
+
+        return false
+      end,
+      "snippet_backward",
+      "fallback",
+    },
+    ["<Space>"] = {
+      function(cmp)
+        if cmp.is_menu_visible() and cmp.get_selected_item_idx() ~= nil then
+          return cmp.accept()
+        end
+
+        return false
+      end,
+      "fallback",
+    },
   },
 
   appearance = {
@@ -31,6 +50,13 @@ blink.setup({
   },
 
   completion = {
+    list = {
+      selection = {
+        preselect = false,
+        auto_insert = false,
+      },
+    },
+
     documentation = {
       auto_show = true,
       auto_show_delay_ms = 500,

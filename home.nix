@@ -60,7 +60,15 @@
 
     gitCredentialHelper.enable = true;
   };
-  
+
+  programs.tmux = {
+    enable = true;
+
+    extraConfig = ''
+      set -g default-shell ${pkgs.zsh}/bin/zsh
+      source-file ${./tmux/tmux.conf}
+    '';
+  };
 
   programs.neovim = {
     enable = true;
@@ -112,6 +120,10 @@
 
       # keymap support
       which-key-nvim
+
+      # pair util
+      nvim-autopairs
+      nvim-surround
 
       # color schema
       nightfox-nvim
