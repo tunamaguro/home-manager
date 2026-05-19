@@ -87,6 +87,9 @@
       plenary-nvim
       telescope-fzf-native-nvim
 
+      # Indent guideline
+      indent-blankline-nvim
+
       # Git signs / hunk navigation
       gitsigns-nvim
 
@@ -106,6 +109,9 @@
       # buffer/tab 
       bufferline-nvim
       mini-bufremove
+
+      # keymap support
+      which-key-nvim
 
       # color schema
       nightfox-nvim
