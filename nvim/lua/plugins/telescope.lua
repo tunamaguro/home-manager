@@ -1,6 +1,14 @@
 local telescope = require("telescope")
 local builtin = require("telescope.builtin")
 
+local rg_hidden_no_git = function()
+  return {
+    "--hidden",
+    "--glob",
+    "!**/.git/**",
+  }
+end
+
 telescope.setup({
   defaults = {
     mappings = {
@@ -12,6 +20,26 @@ telescope.setup({
   },
 
   pickers = {
+    find_files = {
+      find_command = {
+        "fd",
+        "--type",
+        "f",
+        "--hidden",
+        "--exclude",
+        ".git",
+        "--color",
+        "never",
+      },
+    },
+
+    live_grep = {
+      additional_args = rg_hidden_no_git,
+    },
+
+    grep_string = {
+      additional_args = rg_hidden_no_git,
+    },
   },
 })
 
