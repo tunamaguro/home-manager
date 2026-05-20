@@ -12,6 +12,25 @@ telescope.setup({
   },
 
   pickers = {
+    find_files = {
+      find_command = {
+        "fd",
+        "--type",
+        "f",
+        "--hidden",
+        "--exclude",
+        ".git",
+      }
+    },
+    live_grep = {
+      additional_args = function()
+        return {
+          "--hidden",
+          "--glob",
+          "!**/.git/*",
+        }
+      end,
+    }
   },
 })
 
