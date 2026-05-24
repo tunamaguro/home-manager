@@ -157,9 +157,20 @@
 
     settings = {
       add_newline = false;
-      format = "$directory$git_branch$character";
+      format = "$directory$git_branch$line_break$character";
 
       package.disabled = true;
+
+      git_branch = {
+        symbol = "";
+        format = "[git: $branch]($style)";
+      };
+
+      character = {
+        success_symbol = "[>](bold green)";
+        error_symbol = "[>](bold red)";
+        vimcmd_symbol = "[<](bold green)";
+      };
     };
   };
 
@@ -183,7 +194,6 @@
   #
   # or
   #  /etc/profiles/per-user/tunamaguro/etc/profile.d/hm-session-vars.sh
-  #
   home.sessionVariables = {
     # EDITOR = "nvim";
   };
