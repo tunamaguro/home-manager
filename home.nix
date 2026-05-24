@@ -157,13 +157,10 @@
 
     settings = {
       add_newline = false;
-      format = "$directory$git_branch$line_break$character";
-
       package.disabled = true;
 
       git_branch = {
-        symbol = "";
-        format = "[git: $branch]($style)";
+        symbol = "git:";
       };
 
       character = {
