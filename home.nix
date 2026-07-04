@@ -20,6 +20,7 @@
   home.packages = with pkgs; [
     fd
     ripgrep
+    pkgsUnstable.codex
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
