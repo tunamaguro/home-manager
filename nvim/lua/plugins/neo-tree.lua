@@ -35,3 +35,8 @@ vim.keymap.set("n", "<leader>E", "<cmd>Neotree reveal filesystem left<CR>", {
   desc = "Reveal current file in explorer",
   silent = true,
 })
+
+vim.keymap.set("n", "<leader>n", "<cmd>Neotree focus filesystem left<CR>", {
+  desc = "Focus file explorer",
+  silent = true,
+})
