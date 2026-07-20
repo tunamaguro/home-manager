@@ -6,7 +6,7 @@
   home.username = "tunamaguro";
   home.homeDirectory = "/home/tunamaguro";
 
-  # This value determines the Home Manager release that your configuration is
+  # This value determines which release of Home Manager your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
   #
@@ -27,7 +27,7 @@
   # plain files is through 'home.file'.
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+    # # the Nix store. Activating this configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
@@ -145,6 +145,7 @@
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
       zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
+
       compinit -d "${config.xdg.cacheHome}/zsh/zcompdump"
     '';
 
