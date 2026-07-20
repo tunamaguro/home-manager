@@ -113,7 +113,8 @@
       ]))
 
       # File explorer
-      nvim-tree-lua
+      neo-tree-nvim
+      nui-nvim
       nvim-web-devicons
 
       # buffer/tab 
@@ -144,7 +145,6 @@
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
       zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
-
       compinit -d "${config.xdg.cacheHome}/zsh/zcompdump"
     '';
 
@@ -189,7 +189,7 @@
   #
   # or
   #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+  #  /etc/profiles/per-user/tunamaguro/etc/profile.d/hm-session-vars.sh
   #
   # or
   #  /etc/profiles/per-user/tunamaguro/etc/profile.d/hm-session-vars.sh
