@@ -95,6 +95,7 @@
       telescope-nvim
       plenary-nvim
       telescope-fzf-native-nvim
+      telescope-file-browser-nvim
 
       # Indent guideline
       indent-blankline-nvim

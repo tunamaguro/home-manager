@@ -44,6 +44,7 @@ telescope.setup({
 })
 
 pcall(telescope.load_extension, "fzf")
+pcall(telescope.load_extension, "file_browser")
 
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {
   desc = "Find files",
@@ -53,8 +54,8 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, {
   desc = "Live grep",
 })
 
-vim.keymap.set("n", "<leader>fb", builtin.buffers, {
-  desc = "Find buffers",
+vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {
+  desc = "Open file brouwser",
 })
 
 vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {
