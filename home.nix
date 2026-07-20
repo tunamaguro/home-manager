@@ -113,7 +113,8 @@
       ]))
 
       # File explorer
-      nvim-tree-lua
+      neo-tree-nvim
+      nui-nvim
       nvim-web-devicons
 
       # buffer/tab 
