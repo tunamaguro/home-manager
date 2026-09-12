@@ -7,6 +7,7 @@
 - `N`: Normal mode
 - `I`: Insert mode
 - `V`: Visual mode
+- `S`: Select mode
 
 `Custom` はこの設定で明示的に追加しているキーマップ、`Nvim default` は Neovim 0.12 が提供する標準キーマップです。
 
