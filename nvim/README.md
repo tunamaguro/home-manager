@@ -158,16 +158,14 @@ Buffer/path completion は使用せず、LSP completion を中心にしていま
 
 | Mode | Key | Action | Source |
 | --- | --- | --- | --- |
-| N / T | `<leader>t1` | 永続 terminal 1 を開閉 | Custom |
-| N / T | `<leader>t2` | 永続 terminal 2 を開閉 | Custom |
-| N / T | `<leader>t3` | 永続 terminal 3 を開閉 | Custom |
+| N / T | `<leader>t1`〜`<leader>t9` | 永続 terminal 1〜9 を開閉 | Custom |
 | N / T | `<leader>tt` | 一時 terminal を開閉 | Custom |
 | T | `jk` | Terminal mode から Normal mode に移動 | Custom |
 | T | `<C-\><C-n>` | Terminal mode から Normal mode に移動 | Nvim default |
 
 ### Persistent terminals
 
-`<leader>t1`、`<leader>t2`、`<leader>t3` はそれぞれ独立した terminal session です。float を閉じても shell process は終了しないため、実行中の command や shell の状態を保持したまま再表示できます。
+`<leader>t1`〜`<leader>t9` はそれぞれ独立した terminal session です。float を閉じても shell process は終了しないため、実行中の command や shell の状態を保持したまま再表示できます。
 
 ### Temporary terminal
 
