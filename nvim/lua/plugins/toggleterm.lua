@@ -46,12 +46,10 @@ local function toggle_temporary_terminal()
       -- on_close runs before ToggleTerm closes the window, so defer shutdown
       -- until the window has actually been removed.
       vim.schedule(function()
-        if temporary_terminal ~= term then
-          return
-        end
-
         term:shutdown()
-        temporary_terminal = nil
+        if temporary_terminal == term then
+          temporary_terminal = nil
+        end
       end)
     end,
   })
