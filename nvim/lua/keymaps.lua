@@ -3,7 +3,7 @@ vim.keymap.set("i", "jk", "<Esc>", {
   silent = true,
 })
 
--- Native completion keymaps.
+-- Keymaps for Neovim's native completion.
 vim.keymap.set("i", "<Tab>", function()
   if vim.fn.pumvisible() == 1 then
     return "<C-n>"
