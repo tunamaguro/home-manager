@@ -65,9 +65,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "gD", vim.lsp.buf.declaration, "LSP go to declaration")
 
     map("n", "<leader>lf", function()
-      vim.lsp.buf.format({ bufnr = event.buf, async = false, timeout_ms = 1000 })
+      vim.lsp.buf.format({ bufnr = event.buf, id = client.id, timeout_ms = 1000 })
     end, "LSP format buffer")
     map("n", "<leader>lq", vim.diagnostic.setqflist, "LSP diagnostics to quickfix")
+
+    if client:supports_method("textDocument/completion") then
+      -- Use Nvim's native LSP completion. <C-Space> triggers it manually and <C-y> accepts an item.
+      vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
+      map("i", "<C-Space>", vim.lsp.completion.get, "Trigger LSP completion")
+    end
 
     if client:supports_method("textDocument/inlayHint") then
       vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
@@ -79,7 +85,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         group = format_group,
         buffer = event.buf,
         callback = function()
-          vim.lsp.buf.format({ bufnr = event.buf, async = false, timeout_ms = 1000 })
+          vim.lsp.buf.format({ bufnr = event.buf, id = client.id, timeout_ms = 1000 })
         end,
       })
     end

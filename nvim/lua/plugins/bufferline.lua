@@ -12,7 +12,7 @@ require("bufferline").setup({
 
     offsets = {
       {
-        filetype = "NvimTree",
+        filetype = "neo-tree",
         text = "Explorer",
         text_align = "left",
         separator = true,

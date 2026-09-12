@@ -88,17 +88,10 @@
       # LSP server configs
       nvim-lspconfig
 
-      # completion
-      blink-cmp
-
       # fuzzy finder
       telescope-nvim
       plenary-nvim
       telescope-fzf-native-nvim
-      telescope-file-browser-nvim
-
-      # Indent guideline
-      indent-blankline-nvim
 
       # Git signs / hunk navigation
       gitsigns-nvim
@@ -120,6 +113,9 @@
       # buffer/tab 
       bufferline-nvim
       mini-bufremove
+
+      # statusline
+      lualine-nvim
 
       # keymap support
       which-key-nvim
@@ -189,7 +185,6 @@
   #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
   #
   # or
-  #
   #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
   #
   # or
