@@ -15,6 +15,7 @@ require("plugins.bufremove")
 require("plugins.neo-tree")
 require("plugins.telescope")
 require("plugins.gitsigns")
+require("plugins.toggleterm")
 require("plugins.which-key")
 require("plugins.pairs")
 
