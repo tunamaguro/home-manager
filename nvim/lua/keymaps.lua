@@ -24,7 +24,8 @@ end, {
 })
 
 vim.keymap.set("i", "<CR>", function()
-  if vim.fn.pumvisible() == 1 then
+  local completion = vim.fn.complete_info({ "selected" })
+  if vim.fn.pumvisible() == 1 and completion.selected >= 0 then
     return "<C-y>"
   end
   return "<CR>"
