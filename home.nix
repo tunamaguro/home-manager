@@ -27,7 +27,7 @@
   # plain files is through 'home.file'.
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating this configuration will then make '~/.screenrc' a
+    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
@@ -185,7 +185,7 @@
   #  ~/.local/state/nix/profiles/profile/etc/hm-session-vars.sh
   #
   # or
-  #  /etc/profiles/per-user/tunamaguro/etc/profile/etc/hm-session-vars.sh
+  #  /etc/profiles/per-user/tunamaguro/etc/profile/hm-session-vars.sh
   home.sessionVariables = {
     # EDITOR = "nvim";
   };
