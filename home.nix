@@ -27,7 +27,7 @@
   # plain files is through 'home.file'.
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+    # # the Nix store. Activating this configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
@@ -88,17 +88,10 @@
       # LSP server configs
       nvim-lspconfig
 
-      # completion
-      blink-cmp
-
       # fuzzy finder
       telescope-nvim
       plenary-nvim
       telescope-fzf-native-nvim
-      telescope-file-browser-nvim
-
-      # Indent guideline
-      indent-blankline-nvim
 
       # Git signs / hunk navigation
       gitsigns-nvim
@@ -189,11 +182,10 @@
   #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
   #
   # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+  #  ~/.local/state/nix/profiles/profile/etc/hm-session-vars.sh
   #
   # or
-  #  /etc/profiles/per-user/tunamaguro/etc/profile.d/hm-session-vars.sh
+  #  /etc/profiles/per-user/tunamaguro/etc/profile/etc/hm-session-vars.sh
   home.sessionVariables = {
     # EDITOR = "nvim";
   };
