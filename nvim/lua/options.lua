@@ -29,7 +29,6 @@ vim.opt.listchars = {
 
 -- 補完
 vim.o.pumborder = 'rounded';
-vim.opt.complete = { "o" }
 vim.opt.completeopt = { "menu", "menuone", "noselect", "fuzzy", "popup" }
 
 -- インデント

@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "gD", vim.lsp.buf.declaration, "LSP go to declaration")
 
     map("n", "<leader>lf", function()
-      vim.lsp.buf.format({ bufnr = event.buf, async = false, timeout_ms = 1000 })
+      vim.lsp.buf.format({ bufnr = event.buf, id = client.id, timeout_ms = 1000 })
     end, "LSP format buffer")
     map("n", "<leader>lq", vim.diagnostic.setqflist, "LSP diagnostics to quickfix")
 
@@ -85,7 +85,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         group = format_group,
         buffer = event.buf,
         callback = function()
-          vim.lsp.buf.format({ bufnr = event.buf, async = false, timeout_ms = 1000 })
+          vim.lsp.buf.format({ bufnr = event.buf, id = client.id, timeout_ms = 1000 })
         end,
       })
     end
