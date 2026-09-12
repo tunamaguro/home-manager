@@ -10,6 +10,7 @@ require("keymaps")
 
 require('plugins.colorschema')
 require("plugins.bufferline")
+require("plugins.lualine")
 require("plugins.bufremove")
 require("plugins.neo-tree")
 require("plugins.telescope")
