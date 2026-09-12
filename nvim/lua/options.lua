@@ -19,9 +19,18 @@ vim.opt.cursorline = true
 vim.opt.signcolumn = "yes:1"
 vim.opt.wrap = false
 vim.opt.list = true
+vim.opt.listchars = {
+  tab = "│ ",
+  leadtab = "│ ",
+  leadmultispace = "│ ",
+  trail = "·",
+  nbsp = "␣",
+}
 
 -- 補完
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.autocomplete = true
+vim.opt.complete = { ".^5", "w^5", "b^5", "u^5", "o" }
+vim.opt.completeopt = { "menuone", "noselect", "popup", "fuzzy" }
 
 -- インデント
 vim.opt.autoindent = true
