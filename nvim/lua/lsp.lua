@@ -70,7 +70,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<leader>lq", vim.diagnostic.setqflist, "LSP diagnostics to quickfix")
 
     if client:supports_method("textDocument/completion") then
-      vim.lsp.completion.enable(true, client.id, event.buf)
+      -- Use Nvim's native LSP completion. <C-Space> triggers it manually and <C-y> accepts an item.
+      vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
       map("i", "<C-Space>", vim.lsp.completion.get, "Trigger LSP completion")
     end
 
