@@ -28,8 +28,7 @@ vim.opt.listchars = {
 }
 
 -- 補完
-vim.opt.autocomplete = true
-vim.opt.complete = { ".^5", "w^5", "b^5", "u^5", "o" }
+vim.opt.complete = { "o" }
 vim.opt.completeopt = { "menuone", "noselect", "popup", "fuzzy" }
 
 -- インデント
