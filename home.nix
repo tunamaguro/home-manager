@@ -114,6 +114,9 @@
       bufferline-nvim
       mini-bufremove
 
+      # statusline
+      lualine-nvim
+
       # keymap support
       which-key-nvim
 
@@ -182,10 +185,10 @@
   #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
   #
   # or
-  #  ~/.local/state/nix/profiles/profile/etc/hm-session-vars.sh
+  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
   #
   # or
-  #  /etc/profiles/per-user/tunamaguro/etc/profile/hm-session-vars.sh
+  #  /etc/profiles/per-user/tunamaguro/etc/profile.d/hm-session-vars.sh
   home.sessionVariables = {
     # EDITOR = "nvim";
   };
