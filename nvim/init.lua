@@ -9,13 +9,11 @@ require("options")
 require("keymaps")
 
 require('plugins.colorschema')
-require("plugins.blink")
 require("plugins.bufferline")
 require("plugins.bufremove")
 require("plugins.neo-tree")
 require("plugins.telescope")
 require("plugins.gitsigns")
-require("plugins.indent-blankline")
 require("plugins.which-key")
 require("plugins.pairs")
 
