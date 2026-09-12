@@ -69,6 +69,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, "LSP format buffer")
     map("n", "<leader>lq", vim.diagnostic.setqflist, "LSP diagnostics to quickfix")
 
+    if client:supports_method("textDocument/completion") then
+      vim.lsp.completion.enable(true, client.id, event.buf)
+      map("i", "<C-Space>", vim.lsp.completion.get, "Trigger LSP completion")
+    end
+
     if client:supports_method("textDocument/inlayHint") then
       vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
     end
