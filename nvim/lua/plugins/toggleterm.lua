@@ -4,16 +4,7 @@ require("toggleterm").setup({
   direction = "float",
   start_in_insert = true,
   persist_mode = true,
-  close_on_exit = true,
-  float_opts = {
-    border = "rounded",
-    width = function()
-      return math.floor(vim.o.columns * 0.8)
-    end,
-    height = function()
-      return math.floor(vim.o.lines * 0.8)
-    end,
-  },
+  close_on_exit = true
 })
 
 vim.keymap.set("t", "jk", [[<C-\><C-n>]], {
@@ -25,7 +16,7 @@ local function toggle_persistent_terminal(id)
   vim.cmd(("%dToggleTerm direction=float name=terminal-%d"):format(id, id))
 end
 
-for id = 1, 3 do
+for id = 1, 9 do
   vim.keymap.set({ "n", "t" }, "<leader>t" .. id, function()
     toggle_persistent_terminal(id)
   end, {
