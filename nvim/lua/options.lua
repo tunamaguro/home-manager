@@ -7,9 +7,6 @@ vim.opt.termguicolors = true
 -- 変更中のバッファを閉じる前に保存確認する
 vim.opt.confirm = true
 
--- terminal buffer を window を閉じても保持する
-vim.opt.hidden = true
-
 -- 検索関連
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
