@@ -23,4 +23,5 @@ wk.add({
   { "<leader>f", group = "find" },
   { "<leader>g", group = "git" },
   { "<leader>l", group = "lsp" },
+  { "<leader>t", group = "terminal" },
 })
