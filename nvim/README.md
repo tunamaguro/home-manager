@@ -162,6 +162,7 @@ Buffer/path completion は使用せず、LSP completion を中心にしていま
 | N / T | `<leader>t2` | 永続 terminal 2 を開閉 | Custom |
 | N / T | `<leader>t3` | 永続 terminal 3 を開閉 | Custom |
 | N / T | `<leader>tt` | 一時 terminal を開閉 | Custom |
+| T | `jk` | Terminal mode から Normal mode に移動 | Custom |
 | T | `<C-\><C-n>` | Terminal mode から Normal mode に移動 | Nvim default |
 
 ### Persistent terminals
