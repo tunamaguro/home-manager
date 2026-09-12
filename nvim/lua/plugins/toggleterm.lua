@@ -16,6 +16,11 @@ require("toggleterm").setup({
   },
 })
 
+vim.keymap.set("t", "jk", [[<C-\><C-n>]], {
+  desc = "Exit terminal mode",
+  silent = true,
+})
+
 local function toggle_persistent_terminal(id)
   vim.cmd(("%dToggleTerm direction=float name=terminal-%d"):format(id, id))
 end
