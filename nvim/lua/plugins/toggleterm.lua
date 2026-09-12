@@ -34,6 +34,7 @@ local function toggle_temporary_terminal()
   end
 
   temporary_terminal = Terminal:new({
+    id = 99,
     direction = "float",
     display_name = "temporary-terminal",
     hidden = true,
