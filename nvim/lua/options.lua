@@ -28,8 +28,9 @@ vim.opt.listchars = {
 }
 
 -- 補完
+vim.o.pumborder = 'rounded';
 vim.opt.complete = { "o" }
-vim.opt.completeopt = { "menuone", "noselect", "popup", "fuzzy" }
+vim.opt.completeopt = { "menu", "menuone", "noselect", "fuzzy", "popup" }
 
 -- インデント
 vim.opt.autoindent = true
