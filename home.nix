@@ -117,6 +117,9 @@
       # statusline
       lualine-nvim
 
+      # terminal
+      toggleterm-nvim
+
       # keymap support
       which-key-nvim
 
