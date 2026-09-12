@@ -8,6 +8,7 @@
 - `I`: Insert mode
 - `V`: Visual mode
 - `S`: Select mode
+- `T`: Terminal mode
 
 `Custom` はこの設定で明示的に追加しているキーマップ、`Nvim default` は Neovim 0.12 が提供する標準キーマップです。
 
@@ -151,6 +152,28 @@ LSP completion は Neovim 0.12 の native completion を使用します。LSP se
 
 Buffer/path completion は使用せず、LSP completion を中心にしています。
 
+## Terminal / ToggleTerm
+
+すべての ToggleTerm terminal は floating window で表示します。永続 terminal は window を閉じても shell process と terminal buffer を保持し、同じキーで再表示できます。
+
+| Mode | Key | Action | Source |
+| --- | --- | --- | --- |
+| N / T | `<leader>t1` | 永続 terminal 1 を開閉 | Custom |
+| N / T | `<leader>t2` | 永続 terminal 2 を開閉 | Custom |
+| N / T | `<leader>t3` | 永続 terminal 3 を開閉 | Custom |
+| N / T | `<leader>tt` | 一時 terminal を開閉 | Custom |
+| T | `<C-\><C-n>` | Terminal mode から Normal mode に移動 | Nvim default |
+
+### Persistent terminals
+
+`<leader>t1`、`<leader>t2`、`<leader>t3` はそれぞれ独立した terminal session です。float を閉じても shell process は終了しないため、実行中の command や shell の状態を保持したまま再表示できます。
+
+### Temporary terminal
+
+`<leader>tt` は一時的な terminal を作成します。float を閉じると terminal buffer と shell process を破棄するため、次に `<leader>tt` を押したときは新しい terminal session が作成されます。
+
+Terminal 内で shell process 自体が終了した場合も `close_on_exit = true` により float を閉じます。
+
 ## Which-key
 
 | Mode | Key | Action | Source |
@@ -166,6 +189,7 @@ Which-key では以下の prefix をグループ化しています。
 | `<leader>f` | Find |
 | `<leader>g` | Git |
 | `<leader>l` | LSP |
+| `<leader>t` | Terminal |
 
 ## Useful workflows
 
