@@ -1,4 +1,9 @@
-{ config, pkgs, pkgsUnstable, ... }:
+{
+  config,
+  pkgs,
+  pkgsUnstable,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -110,7 +115,7 @@
       nui-nvim
       nvim-web-devicons
 
-      # buffer/tab 
+      # buffer/tab
       bufferline-nvim
       mini-bufremove
 
