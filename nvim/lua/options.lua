@@ -20,15 +20,15 @@ vim.opt.signcolumn = "yes:1"
 vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.listchars = {
-  tab = "│ ",
-  leadtab = "│ ",
-  leadmultispace = "│ ",
-  trail = "·",
-  nbsp = "␣",
+	tab = "│ ",
+	leadtab = "│ ",
+	leadmultispace = "│ ",
+	trail = "·",
+	nbsp = "␣",
 }
 
 -- 補完
-vim.o.pumborder = 'rounded';
+vim.o.pumborder = "rounded"
 vim.opt.completeopt = { "menu", "menuone", "noselect", "fuzzy", "popup" }
 
 -- インデント
