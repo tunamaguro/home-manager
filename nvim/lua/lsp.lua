@@ -1,5 +1,5 @@
 vim.diagnostic.config({
-	update_in_insert = true,
+	update_in_insert = false,
 	virtual_text = true,
 	underline = true,
 	signs = true,
@@ -48,6 +48,25 @@ local function supports_format_on_save(client)
 		and not client:supports_method("textDocument/willSaveWaitUntil")
 end
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = format_group,
+	callback = function(event)
+		local clients = vim.lsp.get_clients({
+			bufnr = event.buf,
+			method = "textDocument/formatting",
+		})
+		if not vim.iter(clients):any(supports_format_on_save) then
+			return
+		end
+
+		vim.lsp.buf.format({
+			bufnr = event.buf,
+			timeout_ms = 1000,
+			filter = supports_format_on_save,
+		})
+	end,
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = lsp_group,
 	callback = function(event)
@@ -82,21 +101,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		if client:supports_method("textDocument/inlayHint") then
 			vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
-		end
-
-		if supports_format_on_save(client) then
-			vim.api.nvim_clear_autocmds({ group = format_group, buffer = event.buf })
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = format_group,
-				buffer = event.buf,
-				callback = function()
-					vim.lsp.buf.format({
-						bufnr = event.buf,
-						timeout_ms = 1000,
-						filter = supports_format_on_save,
-					})
-				end,
-			})
 		end
 	end,
 })
