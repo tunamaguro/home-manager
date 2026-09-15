@@ -4,6 +4,15 @@ vim.diagnostic.config({
 	underline = true,
 	signs = true,
 	severity_sort = true,
+	jump = {
+		on_jump = function(_, bufnr)
+			vim.diagnostic.open_float({
+				bufnr = bufnr,
+				scope = "cursor",
+				focus = false,
+			})
+		end,
+	},
 })
 
 vim.lsp.config("lua_ls", {
@@ -101,6 +110,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		if client:supports_method("textDocument/inlayHint") then
 			vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+		end
+
+		if client:supports_method("textDocument/codeLens") then
+			vim.lsp.codelens.enable(true, { bufnr = event.buf })
 		end
 	end,
 })
