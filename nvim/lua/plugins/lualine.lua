@@ -20,7 +20,7 @@ require("lualine").setup({
 			},
 		},
 		lualine_c = { "filename" },
-		lualine_x = { "filetype" },
+		lualine_x = { vim.ui.progress_status, "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
 	},

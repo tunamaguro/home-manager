@@ -26,9 +26,13 @@ vim.opt.listchars = {
 	trail = "·",
 	nbsp = "␣",
 }
+vim.o.winborder = "rounded"
 
 -- 補完
 vim.o.pumborder = "rounded"
+vim.opt.autocomplete = true
+vim.opt.autocompletedelay = 100
+vim.opt.complete:append("o")
 vim.opt.completeopt = { "menu", "menuone", "noselect", "fuzzy", "popup" }
 
 -- インデント
