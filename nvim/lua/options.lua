@@ -26,6 +26,7 @@ vim.opt.listchars = {
 	trail = "·",
 	nbsp = "␣",
 }
+vim.o.winborder = "rounded"
 
 -- 補完
 vim.o.pumborder = "rounded"
