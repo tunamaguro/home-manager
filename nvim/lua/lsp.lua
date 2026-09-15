@@ -43,6 +43,11 @@ vim.lsp.enable({
 local lsp_group = vim.api.nvim_create_augroup("user-lsp", { clear = true })
 local format_group = vim.api.nvim_create_augroup("user-lsp-format", { clear = true })
 
+local function supports_format_on_save(client)
+	return client:supports_method("textDocument/formatting")
+		and not client:supports_method("textDocument/willSaveWaitUntil")
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = lsp_group,
 	callback = function(event)
@@ -79,13 +84,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
 		end
 
-		if client:supports_method("textDocument/formatting") then
+		if supports_format_on_save(client) then
 			vim.api.nvim_clear_autocmds({ group = format_group, buffer = event.buf })
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = format_group,
 				buffer = event.buf,
 				callback = function()
-					vim.lsp.buf.format({ bufnr = event.buf, id = client.id, timeout_ms = 1000 })
+					vim.lsp.buf.format({
+						bufnr = event.buf,
+						timeout_ms = 1000,
+						filter = supports_format_on_save,
+					})
 				end,
 			})
 		end
