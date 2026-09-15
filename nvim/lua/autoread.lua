@@ -60,6 +60,10 @@ ensure_watcher = function(bufnr)
 	timers[bufnr] = timer
 
 	local ok, cancel = pcall(watch.watch, path, {}, function(_, change_type)
+		if timer:is_closing() then
+			return
+		end
+
 		timer:stop()
 		timer:start(debounce_ms, 0, function()
 			vim.schedule(function()
@@ -108,10 +112,15 @@ vim.api.nvim_create_autocmd({ "BufUnload", "BufWipeout" }, {
 	end,
 })
 
+-- Recover a watcher after a delete/recreate cycle where there was no file to
+-- watch when the original event was handled.
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	group = group,
 	callback = function(event)
-		local bufnr = event.buf or vim.api.nvim_get_current_buf()
+		local bufnr = event.buf
+		if bufnr == nil or bufnr == 0 then
+			bufnr = vim.api.nvim_get_current_buf()
+		end
 		if watchers[bufnr] == nil then
 			ensure_watcher(bufnr)
 		end
