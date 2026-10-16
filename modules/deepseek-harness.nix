@@ -56,7 +56,7 @@ stdenv.mkDerivation (finalAttrs: {
     runHook preBuild
 
     # pnpmConfigHook installs dependencies with --ignore-scripts.
-    pnpm rebuild esbuild node-pty koffi
+    pnpm rebuild esbuild
     pnpm run build
 
     runHook postBuild
@@ -65,14 +65,17 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    # Keep the built workspace layout and pnpm's relative dependency links.
-    mkdir -p "$out/lib/dsh"
-    cp -a . "$out/lib/dsh/"
+    # Deploy turns workspace dependencies into absolute file URLs, so the
+    # source-relative allowBuilds selector no longer matches this package.
+    substituteInPlace pnpm-workspace.yaml \
+      --replace-fail "'@deepseek-ai/dsh-subprocess-local@file:packages/subprocess/subprocess-local': true" \
+        "'@deepseek-ai/dsh-subprocess-local': true"
+    pnpm --filter @deepseek-ai/dsh deploy --prod --offline "$out/lib/dsh"
 
     makeWrapper ${lib.getExe nodejs_24} "$out/bin/dsh" \
       --argv0 dsh \
       --add-flags "--expose-internals" \
-      --add-flags "$out/lib/dsh/apps/cli/lib/bin.js"
+      --add-flags "$out/lib/dsh/lib/bin.js"
 
     runHook postInstall
   '';
@@ -83,10 +86,14 @@ stdenv.mkDerivation (finalAttrs: {
     "$out/bin/dsh" --version
     "$out/bin/dsh" --help > /dev/null
     "$out/bin/dsh" web --help > /dev/null
-    test -s "$out/lib/dsh/apps/web/dist/index.html"
     ${lib.getExe nodejs_24} - "$out/lib/dsh" <<'JS'
+const assert = require("node:assert/strict");
+const { statSync } = require("node:fs");
 const { createRequire } = require("node:module");
-const requireSubprocess = createRequire(process.argv[2] + "/packages/subprocess/subprocess-local/package.json");
+const requireCli = createRequire(process.argv[2] + "/package.json");
+const requireWebApp = createRequire(requireCli.resolve("@deepseek-ai/dsh-web-app/package.json"));
+assert(statSync(requireWebApp.resolve("@deepseek-ai/dsh-web-frontend/dist/index.html")).size > 0);
+const requireSubprocess = createRequire(requireWebApp.resolve("@deepseek-ai/dsh-subprocess-local/package.json"));
 requireSubprocess("node-pty");
 requireSubprocess("koffi");
 JS
