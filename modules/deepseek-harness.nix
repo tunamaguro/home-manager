@@ -70,12 +70,13 @@ stdenv.mkDerivation (finalAttrs: {
     substituteInPlace pnpm-workspace.yaml \
       --replace-fail "'@deepseek-ai/dsh-subprocess-local@file:packages/subprocess/subprocess-local': true" \
         "'@deepseek-ai/dsh-subprocess-local@file://$PWD/packages/subprocess/subprocess-local': true"
-    pnpm --filter @deepseek-ai/dsh deploy --prod --offline "$out/lib/dsh"
+    # The upstream executable closure supplies the CLI's required workspace peers.
+    pnpm --filter dsh-python-runtime-closure deploy --prod --offline "$out/lib/dsh"
 
     makeWrapper ${lib.getExe nodejs_24} "$out/bin/dsh" \
       --argv0 dsh \
       --add-flags "--expose-internals" \
-      --add-flags "$out/lib/dsh/lib/bin.js"
+      --add-flags "$out/lib/dsh/node_modules/@deepseek-ai/dsh/lib/bin.js"
 
     runHook postInstall
   '';
@@ -90,7 +91,8 @@ stdenv.mkDerivation (finalAttrs: {
 const assert = require("node:assert/strict");
 const { statSync } = require("node:fs");
 const { createRequire } = require("node:module");
-const requireCli = createRequire(process.argv[2] + "/package.json");
+const requireRuntime = createRequire(process.argv[2] + "/package.json");
+const requireCli = createRequire(requireRuntime.resolve("@deepseek-ai/dsh/package.json"));
 const requireWebApp = createRequire(requireCli.resolve("@deepseek-ai/dsh-web-app/package.json"));
 assert(statSync(requireWebApp.resolve("@deepseek-ai/dsh-web-frontend/dist/index.html")).size > 0);
 const requireSubprocess = createRequire(requireWebApp.resolve("@deepseek-ai/dsh-subprocess-local/package.json"));
