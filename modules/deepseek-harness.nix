@@ -65,11 +65,11 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    # Deploy turns workspace dependencies into absolute file URLs, so the
-    # source-relative allowBuilds selector no longer matches this package.
+    # File dependencies require an exact allowBuilds selector. Deploy rewrites
+    # the source-relative path to an absolute file URL.
     substituteInPlace pnpm-workspace.yaml \
       --replace-fail "'@deepseek-ai/dsh-subprocess-local@file:packages/subprocess/subprocess-local': true" \
-        "'@deepseek-ai/dsh-subprocess-local': true"
+        "'@deepseek-ai/dsh-subprocess-local@file://$PWD/packages/subprocess/subprocess-local': true"
     pnpm --filter @deepseek-ai/dsh deploy --prod --offline "$out/lib/dsh"
 
     makeWrapper ${lib.getExe nodejs_24} "$out/bin/dsh" \
