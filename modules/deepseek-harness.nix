@@ -71,7 +71,8 @@ stdenv.mkDerivation (finalAttrs: {
       --replace-fail "'@deepseek-ai/dsh-subprocess-local@file:packages/subprocess/subprocess-local': true" \
         "'@deepseek-ai/dsh-subprocess-local@file://$PWD/packages/subprocess/subprocess-local': true"
     # The upstream executable closure supplies the CLI's required workspace peers.
-    pnpm --filter dsh-python-runtime-closure deploy --prod --offline "$out/lib/dsh"
+    # fetchPnpmDeps already verified the pinned lockfile before entering the sandbox.
+    pnpm --filter dsh-python-runtime-closure deploy --prod --offline --trust-lockfile "$out/lib/dsh"
 
     makeWrapper ${lib.getExe nodejs_24} "$out/bin/dsh" \
       --argv0 dsh \
