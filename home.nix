@@ -37,7 +37,6 @@ in
     fd
     ripgrep
     pkgsUnstable.codex
-
     dsh
   ];
 
