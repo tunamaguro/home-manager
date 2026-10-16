@@ -11,7 +11,7 @@
   pnpmDepsHash ? lib.fakeHash,
 }:
 let
-pnpm = pnpm_11.override {
+  pnpm = pnpm_11.override {
     version = "11.28.5";
     hash = "sha256-HvTkR6aHE2VgZPPxdMD0RxmWCgQ6P+IpkWnQjPHb+O4=";
   };
@@ -23,7 +23,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
-    pnpm = pnpm;
+    inherit pnpm;
     fetcherVersion = 4;
     hash = pnpmDepsHash;
   };
@@ -56,7 +56,7 @@ stdenv.mkDerivation (finalAttrs: {
     runHook preBuild
 
     # pnpmConfigHook installs dependencies with --ignore-scripts.
-    pnpm rebuild esbuild
+    pnpm rebuild esbuild node-pty koffi
     pnpm run build
 
     runHook postBuild
@@ -65,14 +65,14 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    # Copy the built CLI and its runtime closure, including workspace packages.
-    # Lifecycle scripts remain enabled here so native dependencies are prepared.
-    pnpm --filter @deepseek-ai/dsh --prod deploy --offline --legacy "$out/lib/dsh"
+    # Keep the built workspace layout and pnpm's relative dependency links.
+    mkdir -p "$out/lib/dsh"
+    cp -a . "$out/lib/dsh/"
 
     makeWrapper ${lib.getExe nodejs_24} "$out/bin/dsh" \
       --argv0 dsh \
       --add-flags "--expose-internals" \
-      --add-flags "$out/lib/dsh/lib/bin.js"
+      --add-flags "$out/lib/dsh/apps/cli/lib/bin.js"
 
     runHook postInstall
   '';
@@ -82,6 +82,14 @@ stdenv.mkDerivation (finalAttrs: {
     runHook preInstallCheck
     "$out/bin/dsh" --version
     "$out/bin/dsh" --help > /dev/null
+    "$out/bin/dsh" web --help > /dev/null
+    test -s "$out/lib/dsh/apps/web/dist/index.html"
+    ${lib.getExe nodejs_24} - "$out/lib/dsh" <<'JS'
+const { createRequire } = require("node:module");
+const requireSubprocess = createRequire(process.argv[2] + "/packages/subprocess/subprocess-local/package.json");
+requireSubprocess("node-pty");
+requireSubprocess("koffi");
+JS
     runHook postInstallCheck
   '';
 
