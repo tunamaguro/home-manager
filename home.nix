@@ -15,6 +15,16 @@ let
     harness-src = dsh-src;
     pnpmDepsHash = "sha256-6yjxQj/+/Din/UJWjQy6DcgZJs7ldf+XO2zhDRZFm0s=";
   };
+  dshWrapper =
+    pkgs.runCommand "dsh"
+      {
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+        inherit (dsh) meta;
+      }
+      ''
+        makeWrapper ${pkgs.lib.getExe dsh} "$out/bin/dsh" \
+          --set DSH_HOME ${pkgs.lib.escapeShellArg "${config.xdg.dataHome}/dsh"}
+      '';
 in
 {
   imports = [ ./modules/opencode.nix ];
@@ -39,7 +49,7 @@ in
     fd
     ripgrep
     pkgsUnstable.codex
-    dsh
+    dshWrapper
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

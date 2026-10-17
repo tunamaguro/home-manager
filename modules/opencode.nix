@@ -8,6 +8,7 @@
     settings = {
       # Update OpenCode through the pinned nixpkgs input.
       autoupdate = false;
+      lsp = true;
     };
 
     # TUI settings use a separate tui.json file.
