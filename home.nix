@@ -8,7 +8,7 @@ let
   dsh-src = pkgs.fetchFromGitHub {
     owner = "shiguredo";
     repo = "deepseek-harness";
-    rev = "d3627f4ff6c52b1cdb325325220c240f9665f62d";
+    rev = "527a1000cfb04a113ccc8d3f3e1296ac67e5c5ac";
     hash = "sha256-hjsn+/cRgmVl5xuvRyLtWRC4XGbNuptCMDSkfwvO+58=";
   };
   dsh = pkgs.callPackage ./modules/deepseek-harness.nix {
