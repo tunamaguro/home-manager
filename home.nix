@@ -1,7 +1,9 @@
 {
   config,
+  lib,
   pkgs,
   pkgsUnstable,
+  dshChatgptPlan,
   ...
 }:
 let
@@ -9,7 +11,7 @@ let
     owner = "shiguredo";
     repo = "deepseek-harness";
     rev = "4a768fde9e1712e76c4f6a8f51b474233be2136b";
-    hash = "sha256-hjsn+/cRgmVl5xuvRyLtWRC4XGbNuptCMDSkfwvO+58=";
+    hash = "sha256-FdUmwoGa7nkearB3WC2Jf96ujO6OFM/QgXMo/7tShw0=";
   };
   dsh = pkgs.callPackage ./modules/deepseek-harness.nix {
     harness-src = dsh-src;
@@ -23,7 +25,8 @@ let
       }
       ''
         makeWrapper ${pkgs.lib.getExe dsh} "$out/bin/dsh" \
-          --set DSH_HOME ${pkgs.lib.escapeShellArg "${config.xdg.dataHome}/dsh"}
+          --set DSH_HOME ${pkgs.lib.escapeShellArg "${config.xdg.dataHome}/dsh"} \
+          --prefix PATH : ${pkgs.lib.makeBinPath [ dsh.pnpm ]}
       '';
 in
 {
@@ -51,6 +54,19 @@ in
     pkgsUnstable.codex
     dshWrapper
   ];
+
+  home.activation.installDshChatgptPlan =
+    lib.hm.dag.entryAfter
+      [
+        "writeBoundary"
+        "installPackages"
+      ]
+      ''
+        for profile in web headless; do
+          run ${lib.getExe dshWrapper} plugin --profile "$profile" add \
+            --offline --ignore-scripts ${lib.escapeShellArg dshChatgptPlan.tarball}
+        done
+      '';
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

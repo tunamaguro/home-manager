@@ -82,6 +82,8 @@ stdenv.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
+  passthru = { inherit pnpm; };
+
   doInstallCheck = true;
   installCheckPhase = ''
     runHook preInstallCheck
