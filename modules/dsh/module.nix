@@ -31,7 +31,7 @@ let
   chatgpt-src = builtins.fetchGit {
     url = "https://github.com/tunamaguro/dsh-chatgpt-subscription.git";
     ref = "main";
-    rev = "c118bb35b1e605638020301f2a7f90268ca6ccac";
+    rev = "8691ee56bb95f6f8b861697075c8989e5db6cc63";
   };
   dshChatgptPlan = pkgs.callPackage "${chatgpt-src}/package.nix" { };
 in
