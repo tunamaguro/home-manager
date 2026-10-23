@@ -57,29 +57,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable",
-        "dsh-chatgpt-subscription": "dsh-chatgpt-subscription"
-      }
-    },
-    "dsh-chatgpt-subscription": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1792760779,
-        "narHash": "sha256-qgNvzSXFdTWfpjNMx9vH/EuIlB4XCyuRASQGFf6+wl8=",
-        "ref": "main",
-        "rev": "c118bb35b1e605638020301f2a7f90268ca6ccac",
-        "revCount": 2,
-        "type": "git",
-        "url": "https://github.com/tunamaguro/dsh-chatgpt-subscription.git"
-      },
-      "original": {
-        "ref": "main",
-        "type": "git",
-        "url": "https://github.com/tunamaguro/dsh-chatgpt-subscription.git"
+        "nixpkgs-unstable": "nixpkgs-unstable"
       }
     }
   },

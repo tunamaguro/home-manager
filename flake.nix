@@ -9,10 +9,6 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dsh-chatgpt-subscription = {
-      url = "git+https://github.com/tunamaguro/dsh-chatgpt-subscription.git?ref=main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -20,7 +16,6 @@
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
-      dsh-chatgpt-subscription,
       ...
     }:
     let
@@ -69,7 +64,6 @@
         # to pass through arguments to home.nix
         extraSpecialArgs = {
           inherit pkgsUnstable;
-          dshChatgptPlan = dsh-chatgpt-subscription.packages.${system}.default;
         };
       };
     };
