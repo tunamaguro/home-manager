@@ -4,30 +4,11 @@
   pkgsUnstable,
   ...
 }:
-let
-  dsh-src = pkgs.fetchFromGitHub {
-    owner = "shiguredo";
-    repo = "deepseek-harness";
-    rev = "527a1000cfb04a113ccc8d3f3e1296ac67e5c5ac";
-    hash = "sha256-hjsn+/cRgmVl5xuvRyLtWRC4XGbNuptCMDSkfwvO+58=";
-  };
-  dsh = pkgs.callPackage ./modules/deepseek-harness.nix {
-    harness-src = dsh-src;
-    pnpmDepsHash = "sha256-6yjxQj/+/Din/UJWjQy6DcgZJs7ldf+XO2zhDRZFm0s=";
-  };
-  dshWrapper =
-    pkgs.runCommand "dsh"
-      {
-        nativeBuildInputs = [ pkgs.makeWrapper ];
-        inherit (dsh) meta;
-      }
-      ''
-        makeWrapper ${pkgs.lib.getExe dsh} "$out/bin/dsh" \
-          --set DSH_HOME ${pkgs.lib.escapeShellArg "${config.xdg.dataHome}/dsh"}
-      '';
-in
 {
-  imports = [ ./modules/opencode.nix ];
+  imports = [
+    ./modules/dsh/module.nix
+    ./modules/opencode.nix
+  ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -49,7 +30,6 @@ in
     fd
     ripgrep
     pkgsUnstable.codex
-    dshWrapper
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
