@@ -27,27 +27,7 @@ let
           --prefix PATH : ${lib.makeBinPath [ dsh.pnpm ]}
       '';
 
-  # Fetch the private repository using the current user's Git credentials.
-  chatgpt-src = builtins.fetchGit {
-    url = "https://github.com/tunamaguro/dsh-chatgpt-subscription.git";
-    ref = "main";
-    rev = "8691ee56bb95f6f8b861697075c8989e5db6cc63";
-  };
-  dshChatgptPlan = pkgs.callPackage "${chatgpt-src}/package.nix" { };
 in
 {
   home.packages = [ dshWrapper ];
-
-  home.activation.installDshChatgptPlan =
-    lib.hm.dag.entryAfter
-      [
-        "writeBoundary"
-        "installPackages"
-      ]
-      ''
-        for profile in web headless; do
-          run ${lib.getExe dshWrapper} plugin --profile "$profile" add \
-            --offline --ignore-scripts ${lib.escapeShellArg dshChatgptPlan.tarball}
-        done
-      '';
 }
