@@ -28,7 +28,14 @@
             "claude-code"
           ];
       };
-      pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
+      pkgsUnstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfreePredicate =
+          pkg:
+          builtins.elem (nixpkgs-unstable.lib.getName nixpkgs-unstable) [
+            "claude-code"
+          ];
+      };
 
     in
     {
