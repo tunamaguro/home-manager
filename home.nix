@@ -8,6 +8,7 @@
   imports = [
     ./modules/dsh/module.nix
     ./modules/opencode.nix
+    ./modules/claude.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
