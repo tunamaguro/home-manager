@@ -32,7 +32,7 @@
         inherit system;
         config.allowUnfreePredicate =
           pkg:
-          builtins.elem (nixpkgs-unstable.lib.getName nixpkgs-unstable) [
+          builtins.elem (nixpkgs-unstable.lib.getName pkg) [
             "claude-code"
           ];
       };
