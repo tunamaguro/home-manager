@@ -28,10 +28,10 @@ let
       '';
 
   # Fetch the private repository using the current user's Git credentials.
-  chatgpt-src = builtins.fetchGit {
+  chatgpt-src = fetchGit {
     url = "https://github.com/tunamaguro/dsh-chatgpt-subscription.git";
     ref = "main";
-    rev = "c118bb35b1e605638020301f2a7f90268ca6ccac";
+    rev = "780482a72d138106cc8e2b3be6715a792231be11";
   };
   dshChatgptPlan = pkgs.callPackage "${chatgpt-src}/package.nix" { };
 in
